@@ -1,0 +1,17 @@
+{% if postrow.S_IS_PC and S_IS_AUTH %}
+	<hr>
+	<p>
+		<i class="icon fa-hourglass-start fa-fw" aria-hidden="true"></i>
+		{{ lang('PC_SINCE') }}
+
+		{% if postrow.L_PC_YEAR %}
+			{{ postrow.L_PC_YEAR }}
+		{% endif %}
+
+		{% if postrow.L_PC_MONTH or postrow.L_PC_YEAR %}
+			{{ postrow.L_PC_MONTH }}
+		{% endif %}
+
+		{{ postrow.L_PC_DAY }}
+	</p>
+{% endif %}

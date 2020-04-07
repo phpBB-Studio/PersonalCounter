@@ -1,0 +1,12 @@
+services:
+    phpbbstudio.pc.listener:
+        class: phpbbstudio\pc\event\listener
+        arguments:
+            - '@auth'
+            - '@config'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@user'
+        tags:
+            - { name: event.listener }

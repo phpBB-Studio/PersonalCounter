@@ -1,0 +1,35 @@
+	<h3>{{ lang('PC_INFO') }}</h3>
+	
+	{# Include Datepicker - CSS #}
+	{% if not definition.INCLUDED_DATEPICKERCSS %}
+		{% INCLUDECSS '@phpbbstudio_pc/datepicker.css' %}
+		{% DEFINE INCLUDED_DATEPICKERCSS = true %}
+	{% endif %}
+
+	{# Include Datepicker - Javascript: https://github.com/fengyuanchen/datepicker #}
+	{% if not definition.INCLUDED_DATEPICKERMINJS %}
+		{% INCLUDEJS '@phpbbstudio_pc/js/datepicker.min.js' %}
+		{% DEFINE INCLUDED_DATEPICKERMINJS = true %}
+	{% endif %}
+
+	{# Initiate jQuery Datepicker #}
+	{% INCLUDEJS '@phpbbstudio_pc/js/studio_date.js' %}
+		
+	<dl>
+		<dt><label for="pc_date">{{ lang('PC_INFO_UCP') ~ lang('COLON') }}</label><br><span>{{ lang('PC_INFO_UCP_EXPLAIN') }}</span></dt>
+
+		<dd>
+			<input name="pc_date" id="pc_date" type="text" class="inputbox autowidth" readonly value="{{ (PC_DATE) ?? '' }}" title="{{ lang('PC_DATE_EXPLAIN') }}"/>
+
+			<button id="pc_date_reset" {% if PC_DATE is empty %}class="button pc-main-date-reset" title="{{ lang('PC_DATE_EXPLAIN') }}"{% else %}class="button" title="{{ lang('RESET') }}"{% endif %}>
+				<i class="fa {% if PC_DATE %}fa-refresh{% else %}fa-calendar-plus-o{% endif %} fa-fw"></i>
+			</button>
+		</dd>
+	</dl>
+
+	{% if S_IS_PC %}
+		<hr>
+		<span><i class="icon fa-hourglass-start fa-fw" aria-hidden="true"></i> {{ lang('PC_SINCE') }}
+			<strong> {{ PC_START_DATE }} </strong>{{ lang('PC_AT') }}<strong> {{ PC_START_TIME }}</strong> &bull; {{ lang('PC_ELAPSED') ~ lang('COLON') }} {{ L_PC_YEAR }} {{ L_PC_MONTH }} {{ L_PC_DAY }}
+		</span>
+	{% endif %}
